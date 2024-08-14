@@ -35,7 +35,7 @@ import {v4 as uuidv4} from 'uuid';
 import {Panel, PanelGroup, PanelResizeHandle} from 'react-resizable-panels';
 
 function App() {
-    const ProviderCanQueryModelList = ["llamaedge"]
+    const ProviderCanQueryModelList = ["gaianet"]
 
     const [modelConfigs, setModelConfigs] = useState([{
         id: Date.now(),
@@ -44,7 +44,7 @@ function App() {
         temperature: 0.7,
         maxTokens: 1000,
         apiKey: '',
-        endpoint: 'https://api.openai.com/v1/chat/completions',
+        endpoint: 'https://llama.us.gaianet.network/v1/chat/completions',
         prompts: [{id: Date.now(), systemPrompt: '', userPrompt: '', output: ''}]
     }]);
     const [variables, setVariables] = useState([]);
@@ -129,7 +129,7 @@ function App() {
             temperature: 0.7,
             maxTokens: 1000,
             apiKey: '',
-            endpoint: 'https://api.openai.com/v1/chat/completions',
+            endpoint: 'https://llama.us.gaianet.network/v1/chat/completions',
             prompts: [{id: Date.now(), systemPrompt: '', userPrompt: '', output: ''}]
         };
         setModelConfigs([...modelConfigs, newModel]);
@@ -318,7 +318,7 @@ function App() {
             let response;
             switch (model.provider) {
                 case 'openai':
-                case 'llamaedge':
+                case 'gaianet':
                     response = await axios.post(model.endpoint, {
                         model: model.model,
                         messages: messages,
@@ -675,7 +675,7 @@ Provide concise suggestions to improve the prompt's effectiveness.`;
                                                 }
                                             }}>
                                         <MenuItem value="openai">OpenAI</MenuItem>
-                                        <MenuItem value="llamaedge">LlamaEdge</MenuItem>
+                                        <MenuItem value="gaianet">gaianet</MenuItem>
                                         <MenuItem value="anthropic">Anthropic</MenuItem>
                                         <MenuItem value="azure">Azure OpenAI</MenuItem>
                                         <MenuItem value="bedrock">Amazon Bedrock</MenuItem>
