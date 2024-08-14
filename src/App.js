@@ -39,8 +39,8 @@ function App() {
 
     const [modelConfigs, setModelConfigs] = useState([{
         id: Date.now(),
-        provider: 'openai',
-        model: 'gpt-3.5-turbo',
+        provider: 'gaianet',
+        model: '',
         temperature: 0.7,
         maxTokens: 1000,
         apiKey: '',
@@ -124,8 +124,8 @@ function App() {
     const handleAddModel = () => {
         const newModel = {
             id: Date.now(),
-            provider: 'openai',
-            model: 'gpt-3.5-turbo',
+            provider: 'gaianet',
+            model: '',
             temperature: 0.7,
             maxTokens: 1000,
             apiKey: '',
