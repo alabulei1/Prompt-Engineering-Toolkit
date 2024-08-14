@@ -36,17 +36,8 @@ import {Panel, PanelGroup, PanelResizeHandle} from 'react-resizable-panels';
 
 function App() {
     const ProviderCanQueryModelList = ["gaianet"]
-
-    const [modelConfigs, setModelConfigs] = useState([{
-        id: Date.now(),
-        provider: 'gaianet',
-        model: '',
-        temperature: 0.7,
-        maxTokens: 1000,
-        apiKey: '',
-        endpoint: 'https://llama.us.gaianet.network/v1/chat/completions',
-        prompts: [{id: Date.now(), systemPrompt: '', userPrompt: '', output: ''}]
-    }]);
+    let first = true;
+    const [modelConfigs, setModelConfigs] = useState([]);
     const [variables, setVariables] = useState([]);
     const [savedPrompts, setSavedPrompts] = useState([]);
     const [savedModels, setSavedModels] = useState([]);
@@ -74,6 +65,7 @@ function App() {
         if (savedModelsData) setSavedModels(JSON.parse(savedModelsData));
         const savedVariablesData = localStorage.getItem('savedVariables');
         if (savedVariablesData) setSavedVariables(JSON.parse(savedVariablesData));
+        handleAddModel();
     }, []);
 
     const handleAddVariable = () => setVariables([...variables, {name: '', value: ''}]);
@@ -95,7 +87,14 @@ function App() {
             const query = await fetch(baseUrl + "/models")
             const queryData = await query.json()
             const newData = {...modelsList}
-            newData[id] = queryData.data.map(model => model.id)
+            if (id) {
+                newData[id] = queryData.data.map(model => model.id)
+            } else {
+                const idList = Object.keys(newData)
+                console.log(idList)
+                const firstId = idList[0]
+                newData[firstId] = queryData.data.map(model => model.id)
+            }
             setModelsList(newData)
         } catch (e) {
             console.log(e)
@@ -132,6 +131,7 @@ function App() {
             endpoint: 'https://llama.us.gaianet.network/v1/chat/completions',
             prompts: [{id: Date.now(), systemPrompt: '', userPrompt: '', output: ''}]
         };
+        queryModel(Date.now(), 'https://llama.us.gaianet.network/v1/chat/completions')
         setModelConfigs([...modelConfigs, newModel]);
     };
 
