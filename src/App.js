@@ -675,7 +675,7 @@ Provide concise suggestions to improve the prompt's effectiveness.`;
                                                 }
                                             }}>
                                         <MenuItem value="openai">OpenAI</MenuItem>
-                                        <MenuItem value="gaianet">gaianet</MenuItem>
+                                        <MenuItem value="gaianet">GaiaNet</MenuItem>
                                         <MenuItem value="anthropic">Anthropic</MenuItem>
                                         <MenuItem value="azure">Azure OpenAI</MenuItem>
                                         <MenuItem value="bedrock">Amazon Bedrock</MenuItem>
